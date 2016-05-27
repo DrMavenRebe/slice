@@ -1,0 +1,21 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+
+    %meta{:content => "Fooda Fitbit Challange App.", :name => "description"}
+    %meta{:content => "Dave Bremner", :name => "author"}
+
+    %title Fooda Fitbit
+
+    = stylesheet_link_tag "marketing.css"
+
+  %body
+
+    = yield
+
+%script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"}
+:javascript
+  window.jQuery || document.write('<\/script>')

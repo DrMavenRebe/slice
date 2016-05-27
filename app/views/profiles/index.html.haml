@@ -1,0 +1,24 @@
+%h3 Update your profile
+
+= simple_form_for(@user, url: profile_path(@user), html: { class: 'form-signin' }) do |f|
+
+  .form-inputs
+    = f.input :name, :required => false, label: "Name", hint: false, input_html: { class: 'form-control' }, placeholder: "Full Name"
+
+  .form-inputs
+    = f.input :email, :required => false, label: "Email", hint: false, input_html: { class: 'form-control' }, placeholder: "Company Email"
+
+  .form-inputs
+    = f.input :market, :required => false, label: "Market", hint: false, input_html: { class: 'form-control' }, placeholder: "Market"
+
+  .form-inputs
+    = f.input :team, :required => false, label: "Team", hint: false, input_html: { class: 'form-control' }, placeholder: "Company Department"
+
+
+  = f.button :submit, 'Save', class: "btn btn-primary"
+
+%hr
+
+%h3 Cancel your account
+
+= link_to "I ain't fit. Get me out.", registration_path("user"), :class => 'btn btn-danger', :confirm => "Are you sure?", :method => :delete

@@ -1,0 +1,24 @@
+%h2.sub-header Five day running step counter
+.table-responsive
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Market
+        %th Department
+        %th Today
+        %th Yesterday
+        %th 2-Days Ago
+        %th 3-Days Ago
+        %th 4-Days Ago
+        %th Total
+    %tbody
+    - @user_summaries.each do |user_summary|
+      %tr
+        %td= user_summary.name
+        %td= user_summary.market
+        %td= user_summary.team
+        - user_summary.day_totals.each do |days_ago, step_count|
+          %td= number_with_delimiter(step_count)
+        %td
+          %b= number_with_delimiter(user_summary.net_total)

@@ -1,0 +1,29 @@
+
+.site-wrapper
+  .site-wrapper-inner
+    .cover-container
+      .masthead.clearfix
+        .inner
+          %h3.masthead-brand Fooda
+          %nav
+            %ul.nav.masthead-nav
+              / %li.active
+              /   %a{:href => "#"} Register
+
+      .inner.cover
+        %h1.cover-heading Fooda's Fitness Challenge
+        %p.lead
+          Get me a fuel band and a;
+          %b fit-bit
+          Get me some workout shoes, and a bench press;
+          Some Lulu Lemons and a french press;
+          I'mma finally focus do some private yoga;
+          Exercise my shoulders, I'mma hide the donuts;
+          Realign my posture, no time for sofas
+
+        %p.lead
+          %a.btn.btn-lg.btn-default{:href => user_omniauth_authorize_path(:fitbit)} Login in with Fitbit
+      .mastfoot
+        .inner
+          %p
+            Made with love by that Bremner kid.

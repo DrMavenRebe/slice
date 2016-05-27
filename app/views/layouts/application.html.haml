@@ -1,0 +1,31 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "Dave Bremner", :name => "author"}
+
+    %title= content_for?(:title) ? yield(:title) : "Fooda Fitbit"
+
+    = stylesheet_link_tag :application
+    = javascript_include_tag :application
+
+  %body
+    = render 'layouts/application/header'
+
+    .container-fluid
+      .row
+        / .col-sm-3.col-md-2.sidebar
+        /   = render 'layouts/application/side_nav'
+
+        / .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+        /   = yield
+
+        .col-sm-12.col-md-12.main
+          = yield
+
+
+    / = render 'layouts/analytics'

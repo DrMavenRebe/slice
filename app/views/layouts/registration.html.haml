@@ -1,0 +1,19 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "Dave Bremner", :name => "author"}
+
+    %title= content_for?(:title) ? yield(:title) : "Fooda Fitbit"
+
+    = stylesheet_link_tag :registration
+    = javascript_include_tag :application
+
+  %body
+    = render 'layouts/registration/header'
+    = flash_messages
+    = yield

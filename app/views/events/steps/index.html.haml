@@ -1,0 +1,12 @@
+%h2.sub-header Events: Daily Steps
+.table-responsive
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Daily Steps
+    %tbody
+      - @event_steps.each do |event_step|
+        %tr
+          %td= event_step.user.name
+          %td= event_step.daily_steps

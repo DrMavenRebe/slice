@@ -1,0 +1,58 @@
+%h2.sub-header.center The Fooda Five Day Leaderboard
+
+#orders_chart{style: "min-width: 310px; max-width: 900px; height: 800px; margin: 0 auto" }
+
+:javascript
+  $(function () {
+    $('#orders_chart').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
+            categories: #{@users.map(&:name)}
+        },
+        yAxis: {
+            min: 0,
+            maxPadding: 0.1,
+            title: {
+                text: 'Steps'
+            },
+            stackLabels: {
+                enabled: true,
+                align: 'right'
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        series: [{
+            name: 'Friday',
+            data: #{@users.map(&:friday_steps)},
+            color: '#ec2f13'
+        }, {
+            name: 'Thursday',
+            data: #{@users.map(&:thursday_steps)},
+            color: '#ee442a'
+        }, {
+            name: 'Wednesday',
+            data: #{@users.map(&:wednesday_steps)},
+            color: '#f05942'
+        }, {
+            name: 'Tuesday',
+            data: #{@users.map(&:tuesday_steps)},
+            color: '#f26e5a'
+        }, {
+            name: 'Monday',
+            data: #{@users.map(&:monday_steps)},
+            color: '#f48371'
+        }]
+    });
+  });
