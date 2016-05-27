@@ -1,4 +1,4 @@
-FitbitFooda::Application.routes.draw do
+Slice::Application.routes.draw do
   require 'sidekiq/web'
   require 'sidetiq/web'
 

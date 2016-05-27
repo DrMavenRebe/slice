@@ -11,7 +11,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module FitbitFooda
+module Slice
   class Application < Rails::Application
 
     config.generators do |g|
