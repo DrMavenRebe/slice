@@ -1,3 +1,3 @@
 # Fooda's Fitbit App
 
-Work in progress rigth now. Ask Dave to help.
+Work in progress right now. Ask Dave to help.
