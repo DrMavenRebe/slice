@@ -15,4 +15,3 @@ Capfile
 .powenv
 .env
 config/application.yml
-config/secrets.yml
