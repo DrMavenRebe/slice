@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 ruby '2.1.7'
 
+gem 'puma'
 gem 'annotate'
 gem 'unicorn'
 gem 'rails', '~> 4.2.0'
@@ -9,7 +10,6 @@ gem 'sinatra', :require => nil
 gem 'fitgem'
 gem 'devise'
 gem 'omniauth-fitbit'
-gem 'pry-byebug'
 gem 'figaro', '~> 1.1'
 gem 'pg'
 gem 'visual-environments'
@@ -26,7 +26,7 @@ gem 'sidekiq-failures'
 gem 'sidekiq-throttler'
 gem 'redis'
 gem 'rabl'
-gem "highcharts-rails"
+gem 'highcharts-rails'
 gem 'dalli'
 gem 'memcachier'
 
@@ -36,6 +36,8 @@ group :production do
 end
 
 group :development, :test do
+  gem 'pry-byebug'
+
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'webrat'
