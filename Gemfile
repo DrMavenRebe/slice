@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 ruby '2.1.7'
 
 gem 'puma'
+gem 'puma_worker_killer'
 gem 'annotate'
 gem 'unicorn'
 gem 'rails', '~> 4.2.0'
