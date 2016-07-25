@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b End date at:
+  = @podium.end_date_at
+
+= link_to 'Edit', edit_podium_path(@podium)
+\|
+= link_to 'Back', podia_path

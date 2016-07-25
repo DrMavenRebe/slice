@@ -1,4 +1,6 @@
 Slice::Application.routes.draw do
+  resources :podia
+
   require 'sidekiq/web'
   require 'sidetiq/web'
 

@@ -1,0 +1,8 @@
+= simple_form_for(@podium) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :end_date_at
+
+  .form-actions
+    = f.button :submit

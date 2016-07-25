@@ -1,0 +1,21 @@
+%h1 Listing podia
+
+%table
+  %thead
+    %tr
+      %th End date at
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @podia.each do |podium|
+      %tr
+        %td= podium.end_date_at
+        %td= link_to 'Show', podium
+        %td= link_to 'Edit', edit_podium_path(podium)
+        %td= link_to 'Destroy', podium, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Podium', new_podium_path
