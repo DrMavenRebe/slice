@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Place:
+  = @podium_podium_placer.place
+%p
+  %b Podium:
+  = @podium_podium_placer.podium_id
+%p
+  %b User:
+  = @podium_podium_placer.user_id
+%p
+  %b Name:
+  = @podium_podium_placer.name
+
+= link_to 'Edit', edit_podium_podium_placer_path(@podium_podium_placer)
+\|
+= link_to 'Back', podium_podium_placers_path

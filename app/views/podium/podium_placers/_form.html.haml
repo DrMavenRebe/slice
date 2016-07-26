@@ -1,0 +1,11 @@
+= simple_form_for(@podium_podium_placer) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :place
+    = f.input :podium_id
+    = f.input :user_id
+    = f.input :name
+
+  .form-actions
+    = f.button :submit

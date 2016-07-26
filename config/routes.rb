@@ -1,4 +1,8 @@
 Slice::Application.routes.draw do
+  namespace :podium do
+    resources :podium_placers
+  end
+
   resources :podia
 
   require 'sidekiq/web'

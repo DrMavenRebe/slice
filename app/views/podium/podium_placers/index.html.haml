@@ -1,0 +1,27 @@
+%h1 Listing podium_podium_placers
+
+%table
+  %thead
+    %tr
+      %th Place
+      %th Podium
+      %th User
+      %th Name
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @podium_podium_placers.each do |podium_podium_placer|
+      %tr
+        %td= podium_podium_placer.place
+        %td= podium_podium_placer.podium_id
+        %td= podium_podium_placer.user_id
+        %td= podium_podium_placer.name
+        %td= link_to 'Show', podium_podium_placer
+        %td= link_to 'Edit', edit_podium_podium_placer_path(podium_podium_placer)
+        %td= link_to 'Destroy', podium_podium_placer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Podium placer', new_podium_podium_placer_path
