@@ -1,0 +1,9 @@
+= simple_form_for(@podium_podium_day_total) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :podium_placer_id
+    = f.input :total
+
+  .form-actions
+    = f.button :submit

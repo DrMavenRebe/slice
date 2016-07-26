@@ -1,5 +1,9 @@
 Slice::Application.routes.draw do
   namespace :podium do
+    resources :podium_day_totals
+  end
+
+  namespace :podium do
     resources :podium_placers
   end
 

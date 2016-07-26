@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Podium placer:
+  = @podium_podium_day_total.podium_placer_id
+%p
+  %b Total:
+  = @podium_podium_day_total.total
+
+= link_to 'Edit', edit_podium_podium_day_total_path(@podium_podium_day_total)
+\|
+= link_to 'Back', podium_podium_day_totals_path

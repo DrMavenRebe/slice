@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 20160819001651) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "podium_podium_day_totals", force: :cascade do |t|
+    t.integer  "podium_placer_id"
+    t.integer  "total"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "podium_podium_placers", force: :cascade do |t|
     t.integer  "place"
     t.integer  "podium_id"

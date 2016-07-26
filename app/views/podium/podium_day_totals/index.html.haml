@@ -1,0 +1,23 @@
+%h1 Listing podium_podium_day_totals
+
+%table
+  %thead
+    %tr
+      %th Podium placer
+      %th Total
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @podium_podium_day_totals.each do |podium_podium_day_total|
+      %tr
+        %td= podium_podium_day_total.podium_placer_id
+        %td= podium_podium_day_total.total
+        %td= link_to 'Show', podium_podium_day_total
+        %td= link_to 'Edit', edit_podium_podium_day_total_path(podium_podium_day_total)
+        %td= link_to 'Destroy', podium_podium_day_total, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Podium day total', new_podium_podium_day_total_path
