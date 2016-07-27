@@ -34,7 +34,7 @@ class Challenges::Weekly::User
   end
 
   def cache_expiration(date)
-    if date  < (now - 1.day)
+    if date  < (now - 2.days)
       5.days
     else
       5.minutes
