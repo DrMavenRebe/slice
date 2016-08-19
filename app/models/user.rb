@@ -7,100 +7,43 @@
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
 #  id                     :integer          not null, primary key
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  market                 :string
 #  name                   :string           default(""), not null
-#  oauth_secret           :string
-#  oauth_token            :string
-#  provider               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  sign_in_count          :integer          default(0)
 #  team                   :string
-#  uid                    :string
 #  updated_at             :datetime
 #
 
 class User < ActiveRecord::Base
 
   has_many :events_steps, class_name: 'Events::Step'
+  has_many :identities, :dependent => :destroy
 
-  devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-  validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
-
-  def self.from_omniauth(auth)
-    current_user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider     = auth.provider
-      user.uid          = auth.uid
-      user.oauth_token  = auth['credentials']['token']
-      user.oauth_secret = auth['credentials']['secret']
-      user.remember_me  = true
-    end
-
-    # The Fitbit API has changed and subsequent logins via OAuth result in new user token/secret
-    # being generated, which invalidates the previously stored credentials. So now, if we already
-    # had a record for the user we must check whether the credentials have changed and store the
-    # new ones.
-    #
-    # See https://groups.google.com/forum/?hl=en&lnk=gcimh#!topic/fitbit-api/Win6-rrD7rc for more
-    # information.
-    if current_user.oauth_token != auth['credentials']['token'] && current_user.oauth_secret != auth['credentials']['secret']
-      current_user.oauth_token = auth['credentials']['token']
-      current_user.oauth_secret = auth['credentials']['secret']
-      current_user.save
-    end
-
-    current_user
-  end
-
-  def self.new_with_session(params, session)
-    if session["devise.user_attributes"]
-      new(session["devise.user_attributes"], without_protection: true) do |user|
-        user.attributes = params
-        user.valid?
-      end
-    else
-      super
-    end
-  end
-
-  def password_required?
-    super && provider.blank?
-  end
-
-  def update_with_password(params, *options)
-    if encrypted_password.blank?
-      update_attributes(params, *options)
-    else
-      super
-    end
-  end
+  devise :registerable
+  devise :omniauthable, :omniauth_providers => [:fitbit_oauth2]
 
   def linked?
-    oauth_token.present? && oauth_secret.present?
+    identities.where(provider: "fitbit_oauth2").any?
+  end
+
+  def identity_for(provider)
+    identities.where(provider: provider).first
   end
 
   def fitbit_data
-    raise "Account is not linked with a Fitbit account" unless linked?
-    @client ||= Fitgem::Client.new(
-                :consumer_key => ENV["FITBIT_CONSUMER_KEY"],
-                :consumer_secret => ENV["FITBIT_CONSUMER_SECRET"],
-                :token => oauth_token,
-                :secret => oauth_secret,
-                :user_id => uid,
-                :ssl => true
-              )
-  end
+    fitbit_identity = identities.where(provider: 'fitbit_oauth2').first
 
-  def has_fitbit_data?
-    !@client.nil?
+    FitgemOauth2::Client.new(
+      token: fitbit_identity.access_token,
+      client_id: ENV['FITBIT_CLIENT_ID'],
+      client_secret: ENV['FITBIT_CLIENT_SECRET'],
+      user_id: fitbit_identity.uid)
   end
 
   def unit_measurement_mappings
@@ -115,5 +58,4 @@ class User < ActiveRecord::Base
       :blood_glucose => @client.label_for_measurement(:blood_glucose)
     }
   end
-
 end
