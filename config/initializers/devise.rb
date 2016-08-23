@@ -171,7 +171,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :fitbit_oauth2, ENV['FITBIT_CLIENT_ID'], ENV["FITBIT_CLIENT_SECRET"], scope: "profile activity  sleep  heartrate location nutrition settings social weight", redirect_uri: "http://localhost:3000", expires_in: 604800
+  config.omniauth :fitbit_oauth2, ENV['FITBIT_CLIENT_ID'], ENV["FITBIT_CLIENT_SECRET"], scope: "profile activity nutrition settings social", redirect_uri: "http://localhost:3000", expires_in: 604800
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
