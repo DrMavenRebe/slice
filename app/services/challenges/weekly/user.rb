@@ -25,7 +25,7 @@ class Challenges::Weekly::User
 
  def fetch_steps(user, date)
     Rails.cache.fetch("#{cache_key(user, date)}/steps", expires_in: cache_expiration(date)) do
-      Fitbit::Summary.new(user, date).steps || 0
+      Fitbit::Step.new(user, date).steps || 0
     end
   end
 

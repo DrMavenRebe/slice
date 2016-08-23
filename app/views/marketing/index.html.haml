@@ -22,7 +22,8 @@
           Realign my posture, no time for sofas
 
         %p.lead
-          %a.btn.btn-lg.btn-default{:href => user_omniauth_authorize_path(:fitbit)} Login in with Fitbit
+          %a.btn.btn-lg.btn-default{:href => omniauth_authorize_path(:user, :fitbit_oauth2)} Login in with Fitbit
+
       .mastfoot
         .inner
           %p

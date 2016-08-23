@@ -4,11 +4,14 @@ class Fitbit::Summary < Fitbit::Data
     :lightlyActiveMinutes, :marginalCalories, :sedentaryMinutes,
     :veryActiveMinutes
 
+    #TODO OAUTH2
+    # this shouuld look like this now that you have to request all your resources:
+    # summary['activities-steps'].first['value']
+
   def initialize(user, date)
     super(user)
 
-    summary = user.fitbit_data.activities_on_date(date)['summary']
-
+    summary = user.fitbit_data.activity_time_series(resource: 'steps', start_date: date, period: '1d')
     if data_available? && summary
       @activeScore = summary['activeScore']
       @activityCalories = summary['activityCalories']

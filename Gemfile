@@ -2,15 +2,10 @@ source 'http://rubygems.org'
 
 ruby '2.1.7'
 
-gem 'puma'
-gem 'puma_worker_killer'
 gem 'annotate'
 gem 'unicorn'
 gem 'rails', '~> 4.2.0'
 gem 'sinatra', :require => nil
-gem 'fitgem'
-gem 'devise'
-gem 'omniauth-fitbit'
 gem 'figaro', '~> 1.1'
 gem 'pg'
 gem 'visual-environments'
@@ -30,6 +25,15 @@ gem 'rabl'
 gem 'highcharts-rails'
 gem 'dalli'
 gem 'memcachier'
+
+# gem 'omniauth-fitbit'
+# gem 'fitgem_oauth2'
+
+gem 'devise'
+
+
+gem 'omniauth-fitbit-oauth2'
+gem 'fitgem_oauth2', '~>1.0.0'
 
 group :production do
   gem 'newrelic_rpm'
