@@ -25,6 +25,8 @@ gem 'rabl'
 gem 'highcharts-rails'
 gem 'dalli'
 gem 'memcachier'
+gem 'puma'
+gem 'puma-heroku'
 
 # gem 'omniauth-fitbit'
 # gem 'fitgem_oauth2'

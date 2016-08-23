@@ -185,6 +185,9 @@ GEM
     pry-byebug (3.4.0)
       byebug (~> 9.0)
       pry (~> 0.10)
+    puma (3.6.0)
+    puma-heroku (1.0.0)
+      puma (~> 3.0)
     rabl (0.13.0)
       activesupport (>= 2.3.14)
     rack (1.6.4)
@@ -330,6 +333,8 @@ DEPENDENCIES
   omniauth-fitbit-oauth2
   pg
   pry-byebug
+  puma
+  puma-heroku
   rabl
   rails (~> 4.2.0)
   rails_12factor
