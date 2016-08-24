@@ -18,12 +18,12 @@ class Identity < ActiveRecord::Base
   belongs_to :user
 
   def self.from_omniauth(auth)
-    identity = Identity.where(provider: auth.provider, uid: auth.uid).first_or_create do |identity|
-      identity.access_token = auth['credentials']['token']
-      identity.refresh_token = auth['credentials']['refresh_token']
-      identity.expires_at = auth['credentials']['expires_at']
-      identity.timezone = auth['info']['timezone']
-    end
+    identity = Identity.where(provider: auth.provider, uid: auth.uid).first_or_create
+    identity.access_token = auth['credentials']['token']
+    identity.refresh_token = auth['credentials']['refresh_token']
+    identity.expires_at = auth['credentials']['expires_at']
+    identity.timezone = auth['info']['timezone']
+    identity.save!
 
     identity
   end
