@@ -28,14 +28,23 @@ class User < ActiveRecord::Base
     identities.where(provider: provider).first
   end
 
-  def fitbit_data
-    fitbit_identity = identities.where(provider: 'fitbit_oauth2').first
+  def fitbit_identity
+    @fitbit_identity_memo ||= identities.where(provider: 'fitbit_oauth2').first
+  end
 
+  def fitbit_data
     FitgemOauth2::Client.new(
       token: fitbit_identity.access_token,
       client_id: ENV['FITBIT_CLIENT_ID'],
       client_secret: ENV['FITBIT_CLIENT_SECRET'],
       user_id: fitbit_identity.uid)
+  end
+
+  def refresh_fitbit_token!
+    response = fitbit_data.refresh_access_token(fitbit_identity.refresh_token)
+    fitbit_identity.update_attributes!(
+      access_token: response['access_token'],
+      refresh_token: response['refresh_token'])
   end
 
   def unit_measurement_mappings
