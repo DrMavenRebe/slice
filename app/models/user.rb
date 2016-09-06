@@ -28,14 +28,28 @@ class User < ActiveRecord::Base
     identities.where(provider: provider).first
   end
 
-  def fitbit_data
-    fitbit_identity = identities.where(provider: 'fitbit_oauth2').first
+  def fitbit_identity
+    @fitbit_identity_memo ||= identities.where(provider: 'fitbit_oauth2').first
+  end
 
+  def fitbit_data
     FitgemOauth2::Client.new(
       token: fitbit_identity.access_token,
       client_id: ENV['FITBIT_CLIENT_ID'],
       client_secret: ENV['FITBIT_CLIENT_SECRET'],
       user_id: fitbit_identity.uid)
+  end
+
+  def refresh_fitbit_token!
+    #FOR THE MOCK
+    # Good response:
+     # => {"access_token"=>"edJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0OURZQkgiLCJhdWQiOiIyMjdSWEIiLCJpc3MiOiJGaXRiaXQiasJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyc29jIHJhY3QgcnNldCBycHJvIHJudXQiLCJleHAiOjE0NzI2MzEwOTUsImlhdCI6MTQ3MjYwMjI5NX0.GyJ7daOzYgowM2krYgTN626CBaIUc6FJ5DxbAwzgxfdA", "expires_in"=>28800, "refresh_token"=>"3fb58bf62a44d197575d6d401adad1158ff10dc296d330ae12505848cd5d1ebc", "scope"=>"activity profile nutrition social settings", "token_type"=>"Bearer", "user_id"=>"49DYBH"} 
+    #bad response
+    # {"errors"=>[{"errorType"=>"invalid_grant", "message"=>"Refresh token invalid: a12409ccb6e75554458004f93e1db81087f104d6093005e7fca30fd88f887e854. Visit https://dev.fitbit.com/docs/oauth2 for more information on the Fitbit Web API authorization process."}], "success"=>false} 
+    response = fitbit_data.refresh_access_token(fitbit_identity.refresh_token)
+    fitbit_identity.update_attributes!(
+      access_token: response['access_token'],
+      refresh_token: response['refresh_token'])
   end
 
   def unit_measurement_mappings
